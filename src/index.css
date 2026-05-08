@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #DDD9D0 transparent;
+  }
+
+  ::selection {
+    background: #1B3A5C;
+    color: white;
+  }
+
+  body {
+    @apply bg-paper text-nearBlack font-sans antialiased;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-navy;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  
+  h1 { @apply text-[32px]; }
+  h2 { @apply text-[22px]; }
+}
+
+/* Subtle page transitions */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progressPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.35s ease-out both;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.25s ease-out both;
+}
+
+.animate-progressPulse {
+  animation: progressPulse 2s ease-in-out infinite;
+}
+
+/* Staggered child animations */
+.stagger-children > * {
+  animation: fadeUp 0.35s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.25s; }
+
+@layer components {
+  /* Forms */
+  .input-field {
+    @apply h-10 border border-warm-border rounded-[4px] px-3 bg-white text-nearBlack text-[14px];
+    @apply focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy transition-all duration-150;
+  }
+  
+  .input-label {
+    @apply block text-[12px] text-muted mb-1 uppercase tracking-wider font-medium;
+  }
+  
+  .input-error {
+    @apply border-danger focus:ring-danger/30;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center h-10 px-5 rounded-[4px] font-medium text-[14px];
+    @apply transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-1;
+  }
+  
+  .btn-primary {
+    @apply btn bg-saffron text-white hover:bg-[#b03808] active:bg-[#9a3007] focus:ring-saffron/40;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-white border border-navy text-navy hover:bg-navy hover:text-white active:bg-navy-dark focus:ring-navy/30;
+  }
+  
+  .btn-destructive {
+    @apply btn bg-white border border-danger text-danger hover:bg-danger hover:text-white focus:ring-danger/30;
+  }
+  
+  .btn-ghost {
+    @apply btn bg-transparent text-muted hover:text-navy hover:bg-navy-light/50 focus:ring-navy/20;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-white border border-warm-border rounded-[8px] p-5;
+    @apply transition-all duration-150;
+  }
+
+  .card-hover:hover {
+    @apply border-navy/30;
+  }
+  
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-medium rounded-[4px] px-2.5 py-1 uppercase tracking-wider;
+  }
+  
+  .badge-approved {
+    @apply badge bg-verified-bg text-verified;
+  }
+  
+  .badge-pending, .badge-urgent {
+    @apply badge bg-warning-bg text-warning;
+  }
+  
+  .badge-overdue, .badge-conflict {
+    @apply badge bg-danger-bg text-danger;
+  }
+  
+  .badge-conflict {
+    @apply border border-danger;
+  }
+  
+  .badge-ontrack {
+    @apply badge bg-info-bg text-info;
+  }
+
+  /* Loading bar */
+  .loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #1B3A5C;
+    z-index: 9999;
+    animation: progressPulse 2s ease-in-out infinite;
+  }
+}
